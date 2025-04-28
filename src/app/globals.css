@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+	--font-onest: var(--font-onest);
+	--font-inter: var(--font-inter);
+	--shadow-outset: 3px 5px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background: #292929;
+	color: white;
+	font-family: var(--font-inter);
+	box-shadow: var(--shadow-inset);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-onest);
+}
+
+.ellipse {
+	position: absolute;
+	width: 170px;
+	height: 170px;
+	top: 10px;
+	left: 10px;
+	border-radius: 50%;
+	z-index: 0;
+	transform-style: preserve-3d;
+	mix-blend-mode: screen;
+}
+
+/* Анимация плейсхолдера */
+input:focus::placeholder {
+	animation: placeholderShift 0.8s forwards;
+}
+
+@keyframes placeholderShift {
+	0% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(10px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+/* Эффект волны */
+@keyframes wave {
+	from {
+		clip-path: circle(0% at 0 50%);
+	}
+	to {
+		clip-path: circle(150% at 0 50%);
+	}
 }
