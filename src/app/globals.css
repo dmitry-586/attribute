@@ -63,3 +63,22 @@ input:focus::placeholder {
 		clip-path: circle(150% at 0 50%);
 	}
 }
+
+/* Кастомный скроллбар */
+.scrollbar-hide::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-hide::-webkit-scrollbar-track {
+  background: #2D2D2D;
+  border-radius: 3px;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb {
+  background: #1F9C8F;
+  border-radius: 3px;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb:hover {
+  background: #1a857a;
+}
