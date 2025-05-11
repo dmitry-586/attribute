@@ -1,5 +1,6 @@
 import { m } from "motion/react"
 import Image from "next/image"
+import { useState } from "react"
 import CustomInput from "./CustomInput"
 
 const containerVariants = {
@@ -11,8 +12,22 @@ export const itemVariants = {
 	hidden: { opacity: 0, y: 20 },
 	visible: { opacity: 1, y: 0 },
 }
+
 export default function Header() {
 	const categories = ["Квартиры", "Спортзалы", "Медицина", "Одежда"]
+	const [inputValue, setInputValue] = useState("")
+	const [selectedCategory, setSelectedCategory] = useState("")
+
+	const handleCategorySelect = (category: string) => {
+		setSelectedCategory(category)
+		setInputValue(category)
+	}
+
+	const handleSend = () => {
+		if (inputValue.trim()) {
+			setInputValue("")
+		}
+	}
 
 	return (
 		<m.header
@@ -27,10 +42,15 @@ export default function Header() {
 			>
 				Добро пожаловать, мы поможем вам с выбором!
 			</m.h1>
+
 			<CustomInput
 				className="mt-[20px]"
 				placeholder="Выберите или напишите категорию для обсуждения.."
+				value={inputValue}
+				onChange={e => setInputValue(e.target.value)}
+				onSend={handleSend}
 			/>
+
 			<m.section variants={containerVariants} className="mt-5 flex gap-[30px]">
 				<m.button
 					variants={itemVariants}
@@ -49,13 +69,17 @@ export default function Header() {
 							whileHover={{ scale: 1.02, backgroundColor: "#1F9C8F" }}
 							whileTap={{ scale: 0.98 }}
 							transition={{ type: "spring", stiffness: 300 }}
-							className="w-[180px] h-[40px] bg-[#62929E] rounded-[20px] text-[18px] cursor-pointer"
+							className={`w-[180px] h-[40px] rounded-[20px] text-[18px] cursor-pointer ${
+								selectedCategory === category ? "bg-[#1F9C8F]" : "bg-[#62929E]"
+							}`}
+							onClick={() => handleCategorySelect(category)}
 						>
 							{category}
 						</m.button>
 					))}
 				</m.div>
 			</m.section>
+
 			<m.span
 				initial={{ scaleX: 0 }}
 				animate={{ scaleX: 1 }}

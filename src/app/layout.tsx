@@ -1,7 +1,7 @@
-import { LazyMotion, domAnimation } from "motion/react"
 import type { Metadata } from "next"
 import { Inter, Onest } from "next/font/google"
 import "./globals.css"
+import { Providers } from "./providers"
 
 const onest = Onest({
 	variable: "--font-onest",
@@ -20,16 +20,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
 	children,
-}: Readonly<{
+}: {
 	children: React.ReactNode
-}>) {
+}) {
 	return (
 		<html lang="en">
-			<LazyMotion features={domAnimation}>
-				<body className={`${inter.variable} ${onest.variable} antialiased`}>
-					{children}
-				</body>
-			</LazyMotion>
+			<body className={`${inter.variable} ${onest.variable} antialiased`}>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	)
 }
